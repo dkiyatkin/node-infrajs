@@ -128,7 +128,9 @@ module.exports = function(infra, html, state, req, root, cb) {
 			path_url.pathname = decodeURI(path_url.pathname);
 			//path_url.href = decodeURI(path_url.href);
 			path_url.search = decodeURI(path_url.search);
-			var njs = new RegExp('([^/]+/node-[^/]+/[^/]+\.js)|(/[^/]+\.njs)$').test(path_url.pathname);
+			// var njs = new RegExp('([^/]+/node-[^/]+/[^/]+\.js)|(/[^/]+\.njs)$').test(path_url.pathname);
+			var njs = /(node(_|\-)[^\/]*\/.*\.)|(\.n\.{0,1})js$/gi.test(path_url.pathname)
+
 			if (path_url.host || (!njs && path_url.search)) { // загружаем через веб
 				if (!path_url.host) {
 					if (path_url.href[0] != '/') path_url.href = path.join(encodeURI(state), path_url.href);
