@@ -12,11 +12,13 @@ exports.test_infraHtml = function(test) {
 			html: '123'
 		};
 	});
-	var infrajs = require('./index.js')({
+	var infrajs = require('./index.js');
+	infrajs({
 		root_dir: __dirname,
 		index_html: '<html><head></head><body></body></html>',
 		Infra: Infra,
 		logger: 'DEBUG'
 	});
+	test.done();
 };
 

@@ -12,7 +12,7 @@ module.exports = function(options) {
 			_infra.checkExists(state, function(exist) {
 				if (exist) {
 					var infra = options.Infra.init();
-					infra.log.logger = 'DEBUG';
+					infra.log.logger = options.logger;
 					getInfraHtml(infra, options.index_html, state, req, options.root_dir, function(status_code, html) {
 						res.writeHead(status_code, { 'Content-Type': 'text/html' });
 						res.end(html);
