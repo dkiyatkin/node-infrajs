@@ -19,6 +19,7 @@ exports.test_infraHtml = function(test) {
 		Infra: Infra,
 		logger: 'DEBUG'
 	});
+	console.log(Infra.init());
 	test.done();
 };
 
