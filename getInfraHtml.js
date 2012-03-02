@@ -112,16 +112,15 @@ module.exports = function(infra, html, state, req, root, cb) {
 				} else if (node1 == node2) return true
 			}
 		}
-		infra.pasteLayer = function(layer) {
-			var html = layer.html;
-			var node = layer.node;
+		infra.pasteNode = function(node, htmlString) {
 			if (node.length) {
 				for (var n=0, ll=node.length; n<ll; n++) {
-					innerHTML(html, node[n], dom);
+					innerHTML(htmlString, node[n], dom);
 				}
-			} else innerHTML(html, node, dom);
-			layer.show = true;
-		}
+			} else {
+				innerHTML(htmlString, node, dom);
+			}
+		};
 		infra.load._load = function(file, callback) {
 			var writeHead = function(){};
 			var end = function(data){callback(0,data)};
