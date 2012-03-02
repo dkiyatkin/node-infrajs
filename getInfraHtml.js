@@ -194,7 +194,7 @@ module.exports = function(infra, html, state, req, root, cb) {
 			// вставить собранный кэш
 			var server_cache = JSON.stringify(infra.load.cache).replace(/\//gim, '\\/');
 			//server_cache = server_cache.replace(/\\\//gim, '/')
-			var head = htmlparser.DomUtils.getElementsByTagName('head', dom);
+			var body = htmlparser.DomUtils.getElementsByTagName('body', dom);
 			var script = {
 				raw: 'script id="infra_server_cache" type="text/javascript"', type: 'script',
 				attribs: { id: 'infra_server_cache', type: 'text/javascript' },
@@ -205,7 +205,7 @@ module.exports = function(infra, html, state, req, root, cb) {
 			script.data = script.raw;
 			script.name = script.type;
 			script.children[0].data = script.children[0].raw;
-			appendChild(script, head[0], dom);
+			appendChild(script, body[0], dom);
 			if (infra.title) { innerHTML(infra.title, htmlparser.DomUtils.getElementsByTagName('title', dom)[0], dom); }
 			// определить status_code
 			if (!infra.status_code) infra.status_code = 200;
