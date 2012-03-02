@@ -8,7 +8,6 @@ var emptyTags = [];
 for (var prop in htmlparser.DefaultHandler._emptyTags) if (htmlparser.DefaultHandler._emptyTags.hasOwnProperty(prop)) {
 	emptyTags.push(prop);
 }
-var Mustache = require('../../lib/mustache/mustache.js').Mustache;
 
 var innerHTML = function(html, parent_elem, dom) {
 	var _innerHTML = function(dom, dom2) {
@@ -102,9 +101,6 @@ module.exports = function(infra, html, state, req, root, cb) {
 	infra.state = state;
 	var handler = new htmlparser.DefaultHandler(function (error, dom) {
 		if (error) throw error;
-		infra.parsetpl = function(html, ctx, callback) {
-			callback(Mustache.to_html(html, ctx));
-		}
 		infra.eqLayerNodes = function(node1, node2) {
 			if (infra.existLayerNode(node1) && infra.existLayerNode(node2)) {
 				var i = node1.length;
