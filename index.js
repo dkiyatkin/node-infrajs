@@ -31,3 +31,4 @@ module.exports = function(options) {
 		} else { next(); }
 	};
 };
+module.exports.regExpStr_njs = getInfraHtml.regExpStr_njs;
