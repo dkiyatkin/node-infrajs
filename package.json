@@ -1,4 +1,31 @@
 {
-	"name" : "InfraHtml",
-	"main" : "index.js"
+	"name": "infrajs",
+	"description": "Server-side infrajs web-framework.",
+	"version": "0.0.1",
+	"author": "Dmitriy Kiyatkin <d.kiyatkin@itlf.ru>",
+	"dependencies": {
+		"request": ">=2.9.153",
+		"connect": ">=2.0.1"
+	},
+	"devDependencies": {
+		"nodeunit": ">=0.7.4"
+	},
+	"keywords": [
+		"framework",
+		"infrajs"
+	],
+	"repository": "git://github.com/dkiyatkin/node-infrajs.git",
+	"bugs": {
+		"url" : "http://github.com/dkiyatkin/node-infrajs/issues"
+	},
+	"licenses" : [
+		{
+			"type": "MIT",
+			"url" : "http://github.com/dkiyatkin/node-infrajs/raw/master/LICENSE"
+		}
+	],
+	"main": "index",
+	"engines": {
+		"node": ">=0.6.0"
+	}
 }
