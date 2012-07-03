@@ -37,3 +37,4 @@ module.exports = function(options) {
 	};
 };
 module.exports.regExpStr_njs = getInfraHtml.regExpStr_njs;
+module.exports.createHtml = getInfraHtml.createHtml;

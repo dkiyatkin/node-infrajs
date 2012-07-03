@@ -3,7 +3,7 @@ var path = require("path");
 var url = require("url");
 var request = require('request');
 var htmlparser = require("htmlparser");
-require('fibers');
+var select = require('soupselect').select;
 var emptyTags = [];
 for (var prop in htmlparser.DefaultHandler._emptyTags) if (htmlparser.DefaultHandler._emptyTags.hasOwnProperty(prop)) {
 	emptyTags.push(prop);
@@ -154,9 +154,7 @@ module.exports = function(infra, html, state, req, root, cb) {
 					if (njs) {
 						try {
 							req.query = path_url.query;
-							Fiber(function() {
-								require(filename).init(req, {writeHead:writeHead, end:end}, null, root);
-							}).run();
+							require(filename).init(req, {writeHead:writeHead, end:end}, null, root);
 						} catch(e) {
 							console.log('wrong njs ' + filename + ' ' + e);
 							callback(0, '');
@@ -182,15 +180,17 @@ module.exports = function(infra, html, state, req, root, cb) {
 			var node = false;
 			var selector = tag.slice(1);
 			if (tag[0] == '#') {
-				if (parent_element == dom) node = htmlparser.DomUtils.getElementById(selector, dom);
-				else {
+				if (parent_element == dom) {
+					node = htmlparser.DomUtils.getElementById(selector, dom);
+				} else {
 					var child_elements = htmlparser.DomUtils.getElements({ tag_name: function(value) { return value; } }, parent_element);
 					for (var i = child_elements.length; --i >= 0;) {
 						if (child_elements[i].attribs && (selector == child_elements[i].attribs.id)) node = child_elements[i];
 					}
 				}
 			} else if (tag[0] == '.') {
-				node = htmlparser.DomUtils.getElementsByClassName(selector, parent_element);
+				node = select(parent_element, tag);
+				//node = htmlparser.DomUtils.getElementsByClassName(selector, parent_element);
 			} else {
 				node = htmlparser.DomUtils.getElementsByTagName(tag, parent_element);
 			}
@@ -224,3 +224,4 @@ module.exports = function(infra, html, state, req, root, cb) {
 	parser.parseComplete(html);
 }
 module.exports.regExpStr_njs = regExpStr_njs;
+module.exports.createHtml = createHtml;
