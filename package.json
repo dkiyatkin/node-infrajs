@@ -1,7 +1,7 @@
 {
 	"name": "infrajs",
 	"description": "Server-side infrajs web-framework.",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"author": "Dmitriy Kiyatkin <d.kiyatkin@itlf.ru>",
 	"dependencies": {
 		"request": ">=2.9.153",
