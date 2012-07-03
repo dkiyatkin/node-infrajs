@@ -7,7 +7,12 @@ module.exports = function(options) {
 	var _infra = options.Infra.init();
 	return function(req, res, next) {
 		// собрать слои, если не собраны и проверить есть ли такой state
-		var state = decodeURI(req.originalUrl);
+		var state = '/';
+		try {
+			state = decodeURI(req.originalUrl);
+		} catch(e) {
+			console.log(e);
+		}
 		if (!url.parse(state).search) { // если есть ? значит это не к infrajs
 			_infra.checkExists(state, function(exist) {
 				if (exist) {
