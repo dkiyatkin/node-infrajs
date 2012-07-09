@@ -135,7 +135,7 @@ module.exports = function(infra, html, state, req, root, cb) {
 			//var njs = /(node(_|\-)[^\/]*\/.*\.)|(\.n\.{0,1})js$/gi.test(path_url.pathname)
 			var njs = new RegExp(regExpStr_njs, 'gi').test(path_url.pathname);
 
-			if (path_url.host || (!njs && path_url.search)) { // загружаем через веб
+			//if (path_url.host || (!njs && path_url.search)) { // загружаем через веб
 				if (!path_url.host) {
 					if (path_url.href[0] != '/') path_url.href = path.join(encodeURI(state), path_url.href);
 					path_url.href = 'http://' + host + path_url.href
@@ -148,6 +148,7 @@ module.exports = function(infra, html, state, req, root, cb) {
 						callback(0, '');
 					}
 				})
+				/*
 			} else { // читаем файл
 				var filename = path.join(root, path_url.pathname);
 				if (new RegExp('^'+root).test(filename)) {
@@ -169,6 +170,7 @@ module.exports = function(infra, html, state, req, root, cb) {
 					callback(0, '');
 				}
 			}
+			*/
 		}
 		infra.getLayerNode = function(layer, parent_element) {
 			if (!parent_element) parent_element = dom;
