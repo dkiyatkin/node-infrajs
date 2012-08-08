@@ -215,6 +215,35 @@ module.exports = function(infra, html, state, req, root, cb) {
 			script.children[0].data = script.children[0].raw;
 			appendChild(script, body[0], dom);
 			if (infra.title) { innerHTML(infra.title, htmlparser.DomUtils.getElementsByTagName('title', dom)[0], dom); }
+			if (infra.meta) {
+				var updateMeta = function(metatags, attr, head) {
+					var update = false;
+					var cnt; for (cnt = 0; cnt < metatags.length; cnt++) {
+						var name = metatags[cnt].attribs["name"];
+						if (name) {
+							name = name.toLowerCase();
+							if (name == attr) {
+								update = true;
+								name.attribs["content"] = infra.meta[attr];
+							}
+						}
+					}
+					if (!update) { // создаем новый
+						var meta = {
+							raw: 'meta name="'+attr+'" content="'+infra.meta[attr]+'"',
+							type: 'tag',
+							name: 'meta',
+							attribs: { name: attr, content: infra.meta[attr] }
+						}
+						meta.data = meta.raw;
+						appendChild(meta, head[0], dom);
+					}
+				};
+				var metatags = htmlparser.DomUtils.getElementsByTagName('meta', dom);
+				var head = htmlparser.DomUtils.getElementsByTagName('head', dom);
+				if (infra.meta.keywords) { updateMeta(metatags, 'keywords', head); }
+				if (infra.meta.description) { updateMeta(metatags, 'description', head); }
+			}
 			// определить status_code
 			if (!infra.status_code) infra.status_code = 200;
 			// передать страницу
