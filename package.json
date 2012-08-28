@@ -1,14 +1,15 @@
 {
 	"name": "infrajs",
 	"description": "Server-side infrajs web-framework.",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"author": "Dmitriy Kiyatkin <d.kiyatkin@itlf.ru>",
 	"dependencies": {
 		"request": ">=2.9.153",
 		"connect": ">=2.0.1"
 	},
 	"devDependencies": {
-		"nodeunit": ">=0.7.4"
+		"nodeunit": ">=0.7.4",
+		"mustache": "0.4.0"
 	},
 	"keywords": [
 		"framework",
