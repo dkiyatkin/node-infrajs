@@ -140,6 +140,7 @@ module.exports = function(infra, html, state, req, root, cb) {
 					if (path_url.href[0] != '/') path_url.href = path.join(encodeURI(state), path_url.href);
 					path_url.href = 'http://' + host + path_url.href
 				}
+				delete(req.headers['accept-encoding']); // TODO
 				request({ headers: req.headers, url: path_url.href, timeout: 60000 }, function(error, response, body) {
 					if (!error && response.statusCode == 200) {
 						callback(0, body);
