@@ -9,7 +9,7 @@
 	},
 	"devDependencies": {
 		"nodeunit": ">=0.7.4",
-		"mustache": "0.4.0"
+		"mustache": "3.1.0"
 	},
 	"keywords": [
 		"framework",
